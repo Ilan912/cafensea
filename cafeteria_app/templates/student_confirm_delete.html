@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Confirmer la Suppression{% endblock %}
+
+{% block content %}
+        <div class="alert alert-warning" role="alert">
+            <h4>⚠️ Confirmation de suppression</h4>
+            <p>Êtes-vous sûr de vouloir supprimer l'étudiant <strong>{{ student.user.username }}</strong> ?</p>
+            <p>Cette action est irréversible.</p>
+        </div>
+        
+        <form method="post" class="d-inline confirm-delete">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">🗑️ Oui, supprimer</button>
+        </form>
+        <a href="{% url 'student_list' %}" class="btn btn-secondary">❌ Annuler</a>
+{% endblock %}

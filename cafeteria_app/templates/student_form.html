@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}{% if form.instance.pk %}Éditer{% else %}Ajouter{% endif %} Étudiant{% endblock %}
+
+{% block content %}
+        <h1>{% if form.instance.pk %}Éditer Étudiant{% else %}Ajouter un Étudiant{% endif %}</h1>
+        
+        <form method="post" class="form-control-lg" style="max-width: 500px;">
+            {% csrf_token %}
+            
+            {% for field in form %}
+                <div class="mb-3">
+                    <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                        <div class="text-danger">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+            
+            <button type="submit" class="btn btn-success">💾 Enregistrer</button>
+            <a href="{% url 'student_list' %}" class="btn btn-secondary">❌ Annuler</a>
+        </form>
+{% endblock %}
